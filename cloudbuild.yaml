@@ -1,0 +1,40 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - build
+    - '-t'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/flask-api:latest'
+    - '-f'
+    - 'Dockerfile.api'
+    - '.'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - push
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/flask-api:latest'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: bash
+  args:
+    - -c
+    - |
+      gcloud run deploy flask-api         --image us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/flask-api:latest         --platform managed         --region us-central1         --allow-unauthenticated         --cpu 2         --memory 4Gi
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - build
+    - '-t'
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/locust:latest'
+    - '-f'
+    - 'Dockerfile.locust'
+    - '.'
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    - push
+    - 'us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/locust:latest'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: bash
+  args:
+    - -c
+    - |
+      gcloud run deploy locust-ui         --image us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/locust:latest         --platform managed         --region us-central1         --allow-unauthenticated         --cpu 1         --memory 1Gi
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/flask-api:latest'
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/flask-locust-repo/locust:latest'

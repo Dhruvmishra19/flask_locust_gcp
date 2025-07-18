@@ -1,0 +1,9 @@
+FROM python:3.9-slim
+WORKDIR /locust
+COPY locust-requirements.txt .
+RUN pip install --no-cache-dir -r locust-requirements.txt
+COPY locustfile.py .
+EXPOSE 8089
+CMD ["locust","-f","locustfile.py",
+     "--host","https://flask-api-<REGION>-<YOUR_PROJECT>.run.app",
+     "--web-host","0.0.0.0"]
