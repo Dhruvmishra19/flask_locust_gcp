@@ -3,7 +3,6 @@ WORKDIR /locust
 COPY locust-requirements.txt .
 RUN pip install --no-cache-dir -r locust-requirements.txt
 COPY locustfile.py .
-# Expose the default port for Cloud Run
 EXPOSE 8080
-# Use the PORT environment variable for the web UI and remove the hardcoded host
-CMD ["locust", "-f", "locustfile.py", "--web-host", "0.0.0.0", "--web-port", "${PORT}"]
+# Use shell form so the ${PORT} variable is substituted correctly
+CMD locust -f locustfile.py --web-host 0.0.0.0 --web-port ${PORT}
