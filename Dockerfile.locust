@@ -3,7 +3,7 @@ WORKDIR /locust
 COPY locust-requirements.txt .
 RUN pip install --no-cache-dir -r locust-requirements.txt
 COPY locustfile.py .
-EXPOSE 8089
-CMD ["locust","-f","locustfile.py",
-     "--host","https://flask-api-<REGION>-<YOUR_PROJECT>.run.app",
-     "--web-host","0.0.0.0"]
+# Expose the default port for Cloud Run
+EXPOSE 8080
+# Use the PORT environment variable for the web UI and remove the hardcoded host
+CMD ["locust", "-f", "locustfile.py", "--web-host", "0.0.0.0", "--web-port", "${PORT}"]
