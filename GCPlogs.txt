@@ -1,0 +1,425 @@
+  b99e40e..f995a0e  main       -> origin/main
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ git reset --hard origin/main
+HEAD is now at f995a0e Update Dockerfile.locust
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ gcloud builds submit --config cloudbuild.yaml
+Creating temporary archive of 7 file(s) totalling 4.4 KiB before compression.
+Uploading tarball of [.] to [gs://ornate-axiom-466310-f0_cloudbuild/source/1752861462.978724-b30766bd4f6b4ca18d9a5d9911151fd0.tgz]
+Created [https://cloudbuild.googleapis.com/v1/projects/ornate-axiom-466310-f0/locations/global/builds/5e65d587-b211-4dc9-baf6-dc6bc6371178].
+Logs are available at [ https://console.cloud.google.com/cloud-build/builds/5e65d587-b211-4dc9-baf6-dc6bc6371178?project=1026355969293 ].
+Waiting for build to complete. Polling interval: 1 second(s).
+------------------------------------------------------------------------------------------------------------- REMOTE BUILD OUTPUT --------------------------------------------------------------------------------------------------------------
+starting build "5e65d587-b211-4dc9-baf6-dc6bc6371178"
+
+FETCHSOURCE
+Fetching storage object: gs://ornate-axiom-466310-f0_cloudbuild/source/1752861462.978724-b30766bd4f6b4ca18d9a5d9911151fd0.tgz#1752861463971219
+Copying gs://ornate-axiom-466310-f0_cloudbuild/source/1752861462.978724-b30766bd4f6b4ca18d9a5d9911151fd0.tgz#1752861463971219...
+/ [1 files][  1.9 KiB/  1.9 KiB]                                                
+Operation completed over 1 objects/1.9 KiB.
+BUILD
+Starting Step #0
+Step #0: Already have image (with digest): gcr.io/cloud-builders/docker
+Step #0: Sending build context to Docker daemon  11.26kB
+Step #0: Step 1/7 : FROM python:3.10-slim
+Step #0: 3.10-slim: Pulling from library/python
+Step #0: 3da95a905ed5: Already exists
+Step #0: 0ebcc011f0ec: Pulling fs layer
+Step #0: 92d63ec5cbeb: Pulling fs layer
+Step #0: 64b78282ca88: Pulling fs layer
+Step #0: 0ebcc011f0ec: Verifying Checksum
+Step #0: 0ebcc011f0ec: Download complete
+Step #0: 64b78282ca88: Verifying Checksum
+Step #0: 64b78282ca88: Download complete
+Step #0: 0ebcc011f0ec: Pull complete
+Step #0: 92d63ec5cbeb: Verifying Checksum
+Step #0: 92d63ec5cbeb: Download complete
+Step #0: 92d63ec5cbeb: Pull complete
+Step #0: 64b78282ca88: Pull complete
+Step #0: Digest: sha256:9dd6774a1276178f94b0cc1fb1f0edd980825d0ea7634847af9940b1b6273c13
+Step #0: Status: Downloaded newer image for python:3.10-slim
+Step #0:  563dffbdc425
+Step #0: Step 2/7 : WORKDIR /app
+Step #0:  Running in 0cfbc83a4b50
+Step #0: Removing intermediate container 0cfbc83a4b50
+Step #0:  2fdc8b3365da
+Step #0: Step 3/7 : COPY requirements.txt .
+Step #0:  76313ad4ab7e
+Step #0: Step 4/7 : RUN pip install --no-cache-dir -r requirements.txt
+Step #0:  Running in 70495bb458e8
+Step #0: Collecting Flask==2.2.5
+Step #0:   Downloading Flask-2.2.5-py3-none-any.whl (101 kB)
+Step #0:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.8/101.8 kB 5.0 MB/s eta 0:00:00
+Step #0: Collecting gunicorn==20.1.0
+Step #0:   Downloading gunicorn-20.1.0-py3-none-any.whl (79 kB)
+Step #0:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.5/79.5 kB 35.4 MB/s eta 0:00:00
+Step #0: Collecting itsdangerous>=2.0
+Step #0:   Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Step #0: Collecting Werkzeug>=2.2.2
+Step #0:   Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
+Step #0:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 224.5/224.5 kB 13.4 MB/s eta 0:00:00
+Step #0: Collecting Jinja2>=3.0
+Step #0:   Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Step #0:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 19.0 MB/s eta 0:00:00
+Step #0: Collecting click>=8.0
+Step #0:   Downloading click-8.2.1-py3-none-any.whl (102 kB)
+Step #0:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 40.2 MB/s eta 0:00:00
+Step #0: Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.10/site-packages (from gunicorn==20.1.0->-r requirements.txt (line 2)) (65.5.1)
+Step #0: Collecting MarkupSafe>=2.0
+Step #0:   Downloading MarkupSafe-3.0.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (20 kB)
+Step #0: Installing collected packages: MarkupSafe, itsdangerous, gunicorn, click, Werkzeug, Jinja2, Flask
+Step #0: Successfully installed Flask-2.2.5 Jinja2-3.1.6 MarkupSafe-3.0.2 Werkzeug-3.1.3 click-8.2.1 gunicorn-20.1.0 itsdangerous-2.2.0
+Step #0: WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Step #0: 
+Step #0: [notice] A new release of pip is available: 23.0.1 -> 25.1.1
+Step #0: [notice] To update, run: pip install --upgrade pip
+Step #0: Removing intermediate container 70495bb458e8
+Step #0:  a9856c752541
+Step #0: Step 5/7 : COPY app.py .
+Step #0:  97fe6f45829b
+Step #0: Step 6/7 : EXPOSE 8080
+Step #0:  Running in afe96d4015e0
+Step #0: Removing intermediate container afe96d4015e0
+Step #0:  8b5a6f8a9e08
+Step #0: Step 7/7 : CMD gunicorn app:app --bind 0.0.0.0:${PORT} --workers 2
+Step #0:  Running in fbdc18f1e758
+Step #0: Removing intermediate container fbdc18f1e758
+Step #0:  5858fec428ea
+Step #0: Successfully built 5858fec428ea
+Step #0: Successfully tagged us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/flask-api:latest
+Finished Step #0
+Starting Step #1
+Step #1: Already have image (with digest): gcr.io/cloud-builders/docker
+Step #1: The push refers to repository [us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/flask-api]
+Step #1: 46ce67099571: Preparing
+Step #1: 116b4a572867: Preparing
+Step #1: 3d77e5a12fc2: Preparing
+Step #1: 36a794139133: Preparing
+Step #1: 31abbb538de0: Preparing
+Step #1: a2ccf7527b3c: Preparing
+Step #1: abd92ba2021e: Preparing
+Step #1: 1bb35e8b4de1: Preparing
+Step #1: a2ccf7527b3c: Waiting
+Step #1: abd92ba2021e: Waiting
+Step #1: 1bb35e8b4de1: Waiting
+Step #1: 31abbb538de0: Layer already exists
+Step #1: a2ccf7527b3c: Layer already exists
+Step #1: abd92ba2021e: Layer already exists
+Step #1: 46ce67099571: Pushed
+Step #1: 3d77e5a12fc2: Pushed
+Step #1: 36a794139133: Pushed
+Step #1: 116b4a572867: Pushed
+Step #1: 1bb35e8b4de1: Pushed
+Step #1: latest: digest: sha256:68353cc11a54b52d7d116bdf50a3c7691b430395cc0f07874e96e643436e61d5 size: 1991
+Finished Step #1
+Starting Step #2
+Step #2: Pulling image: gcr.io/google.com/cloudsdktool/cloud-sdk
+Step #2: Using default tag: latest
+Step #2: latest: Pulling from google.com/cloudsdktool/cloud-sdk
+Step #2: 5c9256e0f3ca: Already exists
+Step #2: c54dac92af92: Pulling fs layer
+Step #2: 5dabbeb36ba5: Pulling fs layer
+Step #2: 153a258695cc: Pulling fs layer
+Step #2: 48f6876739ea: Pulling fs layer
+Step #2: 48f6876739ea: Waiting
+Step #2: 5dabbeb36ba5: Download complete
+Step #2: c54dac92af92: Verifying Checksum
+Step #2: c54dac92af92: Download complete
+Step #2: 48f6876739ea: Verifying Checksum
+Step #2: 48f6876739ea: Download complete
+Step #2: c54dac92af92: Pull complete
+Step #2: 5dabbeb36ba5: Pull complete
+Step #2: 153a258695cc: Verifying Checksum
+Step #2: 153a258695cc: Download complete
+Step #2: 153a258695cc: Pull complete
+Step #2: 48f6876739ea: Pull complete
+Step #2: Digest: sha256:fa4e7d418452a14ebbf2d5c4ed1827d63625914f3bb3e918cd95a504ac317c7b
+Step #2: Status: Downloaded newer image for gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+Step #2: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+Step #2: Deploying container to Cloud Run service [flask-api] in project [ornate-axiom-466310-f0] region [us-central1]
+Step #2: Deploying...
+Step #2: Setting IAM Policy............warning
+Step #2: Creating Revision..................................................................done
+Step #2: Routing traffic.....done
+Step #2: Completed with warnings:
+Step #2:   Setting IAM policy failed, try "gcloud beta run services add-iam-policy-binding --region=us-central1 --member=allUsers --role=roles/run.invoker flask-api"
+Step #2: Service [flask-api] revision [flask-api-00006-n9g] has been deployed and is serving 100 percent of traffic.
+Step #2: Service URL: https://flask-api-1026355969293.us-central1.run.app
+Finished Step #2
+Starting Step #3
+Step #3: Already have image (with digest): gcr.io/cloud-builders/docker
+Step #3: Sending build context to Docker daemon  11.26kB
+Step #3: Step 1/7 : FROM python:3.9-slim
+Step #3: 3.9-slim: Pulling from library/python
+Step #3: 3da95a905ed5: Already exists
+Step #3: ae17c88c7d53: Pulling fs layer
+Step #3: 08ebcf91c620: Pulling fs layer
+Step #3: 9f1673b82500: Pulling fs layer
+Step #3: 9f1673b82500: Verifying Checksum
+Step #3: 9f1673b82500: Download complete
+Step #3: ae17c88c7d53: Verifying Checksum
+Step #3: ae17c88c7d53: Download complete
+Step #3: 08ebcf91c620: Verifying Checksum
+Step #3: 08ebcf91c620: Download complete
+Step #3: ae17c88c7d53: Pull complete
+Step #3: 08ebcf91c620: Pull complete
+Step #3: 9f1673b82500: Pull complete
+Step #3: Digest: sha256:c2a0feb07dedbf91498883c2f8e1e5201e95c91d413e21c3bea780c8aad8e6a7
+Step #3: Status: Downloaded newer image for python:3.9-slim
+Step #3:  a1ec6a2ef164
+Step #3: Step 2/7 : WORKDIR /locust
+Step #3:  Running in 7f26646c6bac
+Step #3: Removing intermediate container 7f26646c6bac
+Step #3:  3b083f81560d
+Step #3: Step 3/7 : COPY locust-requirements.txt .
+Step #3:  6682bf81f5d2
+Step #3: Step 4/7 : RUN pip install --no-cache-dir -r locust-requirements.txt
+Step #3:  Running in 3c01cd600a52
+Step #3: Collecting locust==2.15.0
+Step #3:   Downloading locust-2.15.0-py3-none-any.whl (825 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 825.6/825.6 kB 13.8 MB/s eta 0:00:00
+Step #3: Collecting psutil>=5.6.7
+Step #3:   Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (277 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 278.0/278.0 kB 26.2 MB/s eta 0:00:00
+Step #3: Collecting Flask-BasicAuth>=0.2.0
+Step #3:   Downloading Flask-BasicAuth-0.2.0.tar.gz (16 kB)
+Step #3:   Preparing metadata (setup.py): started
+Step #3:   Preparing metadata (setup.py): finished with status 'done'
+Step #3: Collecting typing-extensions>=3.7.4.3
+Step #3:   Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 137.0 MB/s eta 0:00:00
+Step #3: Collecting ConfigArgParse>=1.0
+Step #3:   Downloading configargparse-1.7.1-py3-none-any.whl (25 kB)
+Step #3: Collecting Flask-Cors>=3.0.10
+Step #3:   Downloading flask_cors-6.0.1-py3-none-any.whl (13 kB)
+Step #3: Collecting msgpack>=0.6.2
+Step #3:   Downloading msgpack-1.1.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (405 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 405.9/405.9 kB 28.7 MB/s eta 0:00:00
+Step #3: Collecting roundrobin>=0.0.2
+Step #3:   Downloading roundrobin-0.0.4.tar.gz (3.4 kB)
+Step #3:   Preparing metadata (setup.py): started
+Step #3:   Preparing metadata (setup.py): finished with status 'done'
+Step #3: Collecting requests>=2.23.0
+Step #3:   Downloading requests-2.32.4-py3-none-any.whl (64 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.8/64.8 kB 159.4 MB/s eta 0:00:00
+Step #3: Collecting flask>=2.0.0
+Step #3:   Downloading flask-3.1.1-py3-none-any.whl (103 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.3/103.3 kB 176.5 MB/s eta 0:00:00
+Step #3: Collecting geventhttpclient>=2.0.2
+Step #3:   Downloading geventhttpclient-2.3.4-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (112 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.0/113.0 kB 134.6 MB/s eta 0:00:00
+Step #3: Collecting Werkzeug>=2.0.0
+Step #3:   Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 224.5/224.5 kB 30.9 MB/s eta 0:00:00
+Step #3: Collecting gevent>=20.12.1
+Step #3:   Downloading gevent-25.5.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 33.7 MB/s eta 0:00:00
+Step #3: Collecting pyzmq!=23.0.0,>=22.2.1
+Step #3:   Downloading pyzmq-27.0.0-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (863 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 863.5/863.5 kB 48.8 MB/s eta 0:00:00
+Step #3: Collecting markupsafe>=2.1.1
+Step #3:   Downloading MarkupSafe-3.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (20 kB)
+Step #3: Collecting importlib-metadata>=3.6.0
+Step #3:   Downloading importlib_metadata-8.7.0-py3-none-any.whl (27 kB)
+Step #3: Collecting click>=8.1.3
+Step #3:   Downloading click-8.1.8-py3-none-any.whl (98 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.2/98.2 kB 179.4 MB/s eta 0:00:00
+Step #3: Collecting itsdangerous>=2.2.0
+Step #3:   Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Step #3: Collecting jinja2>=3.1.2
+Step #3:   Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 107.6 MB/s eta 0:00:00
+Step #3: Collecting blinker>=1.9.0
+Step #3:   Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Step #3: Collecting zope.interface
+Step #3:   Downloading zope.interface-7.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (253 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 253.8/253.8 kB 128.8 MB/s eta 0:00:00
+Step #3: Collecting greenlet>=3.2.2
+Step #3:   Downloading greenlet-3.2.3-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (580 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 580.8/580.8 kB 53.3 MB/s eta 0:00:00
+Step #3: Collecting zope.event
+Step #3:   Downloading zope_event-5.1-py3-none-any.whl (6.9 kB)
+Step #3: Collecting certifi
+Step #3:   Downloading certifi-2025.7.14-py3-none-any.whl (162 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 162.7/162.7 kB 193.7 MB/s eta 0:00:00
+Step #3: Collecting brotli
+Step #3:   Downloading Brotli-1.1.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl (2.8 MB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 63.0 MB/s eta 0:00:00
+Step #3: Collecting urllib3
+Step #3:   Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.8/129.8 kB 209.2 MB/s eta 0:00:00
+Step #3: Collecting idna<4,>=2.5
+Step #3:   Downloading idna-3.10-py3-none-any.whl (70 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 156.4 MB/s eta 0:00:00
+Step #3: Collecting charset_normalizer<4,>=2
+Step #3:   Downloading charset_normalizer-3.4.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (149 kB)
+Step #3:      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 149.5/149.5 kB 202.7 MB/s eta 0:00:00
+Step #3: Collecting zipp>=3.20
+Step #3:   Downloading zipp-3.23.0-py3-none-any.whl (10 kB)
+Step #3: Requirement already satisfied: setuptools in /usr/local/lib/python3.9/site-packages (from zope.event->gevent>=20.12.1->locust==2.15.0->-r locust-requirements.txt (line 1)) (58.1.0)
+Step #3: Building wheels for collected packages: Flask-BasicAuth, roundrobin
+Step #3:   Building wheel for Flask-BasicAuth (setup.py): started
+Step #3:   Building wheel for Flask-BasicAuth (setup.py): finished with status 'done'
+Step #3:   Created wheel for Flask-BasicAuth: filename=Flask_BasicAuth-0.2.0-py3-none-any.whl size=4242 sha256=90c547fa0d55299beee89f58b7cd544d57734fa7ee9a945afc636b72c16dc919
+Step #3:   Stored in directory: /tmp/pip-ephem-wheel-cache-6kv2icsx/wheels/d4/5a/db/e442580c22be34f69e537448832d7e1ee5a9c5adb63ace30bf
+Step #3:   Building wheel for roundrobin (setup.py): started
+Step #3:   Building wheel for roundrobin (setup.py): finished with status 'done'
+Step #3:   Created wheel for roundrobin: filename=roundrobin-0.0.4-py3-none-any.whl size=4033 sha256=5cdf566788c4a7dc625d62ca53433e8590578db90b283b2ec53287b1654270d5
+Step #3:   Stored in directory: /tmp/pip-ephem-wheel-cache-6kv2icsx/wheels/f0/a5/95/f5228e0966ecd65b54419065aefc1892af1fc06652fcb9f4d0
+Step #3: Successfully built Flask-BasicAuth roundrobin
+Step #3: Installing collected packages: roundrobin, brotli, zope.interface, zope.event, zipp, urllib3, typing-extensions, pyzmq, psutil, msgpack, markupsafe, itsdangerous, idna, greenlet, ConfigArgParse, click, charset_normalizer, certifi, blinker, Werkzeug, requests, jinja2, importlib-metadata, gevent, geventhttpclient, flask, Flask-Cors, Flask-BasicAuth, locust
+Step #3: Successfully installed ConfigArgParse-1.7.1 Flask-BasicAuth-0.2.0 Flask-Cors-6.0.1 Werkzeug-3.1.3 blinker-1.9.0 brotli-1.1.0 certifi-2025.7.14 charset_normalizer-3.4.2 click-8.1.8 flask-3.1.1 gevent-25.5.1 geventhttpclient-2.3.4 greenlet-3.2.3 idna-3.10 importlib-metadata-8.7.0 itsdangerous-2.2.0 jinja2-3.1.6 locust-2.15.0 markupsafe-3.0.2 msgpack-1.1.1 psutil-7.0.0 pyzmq-27.0.0 requests-2.32.4 roundrobin-0.0.4 typing-extensions-4.14.1 urllib3-2.5.0 zipp-3.23.0 zope.event-5.1 zope.interface-7.2
+Step #3: WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+Step #3: 
+Step #3: [notice] A new release of pip is available: 23.0.1 -> 25.1.1
+Step #3: [notice] To update, run: pip install --upgrade pip
+Step #3: Removing intermediate container 3c01cd600a52
+Step #3:  7783ae2f445a
+Step #3: Step 5/7 : COPY locustfile.py .
+Step #3:  7337bbfc8a0c
+Step #3: Step 6/7 : EXPOSE 8080
+Step #3:  Running in 99380fd49ca1
+Step #3: Removing intermediate container 99380fd49ca1
+Step #3:  b6791dbb9a15
+Step #3: Step 7/7 : CMD locust -f locustfile.py --web-host 0.0.0.0 --web-port ${PORT}
+Step #3:  Running in f3b85e82d66c
+Step #3: Removing intermediate container f3b85e82d66c
+Step #3:  ba14a47c5b4a
+Step #3: Successfully built ba14a47c5b4a
+Step #3: Successfully tagged us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/locust:latest
+Finished Step #3
+Starting Step #4
+Step #4: Already have image (with digest): gcr.io/cloud-builders/docker
+Step #4: The push refers to repository [us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/locust]
+Step #4: 264debed256c: Preparing
+Step #4: c75611081b9c: Preparing
+Step #4: f73462fd3903: Preparing
+Step #4: d21938364ca3: Preparing
+Step #4: 13242f53ac09: Preparing
+Step #4: 3d8533b4dc1f: Preparing
+Step #4: 7ff2f4499221: Preparing
+Step #4: 1bb35e8b4de1: Preparing
+Step #4: 3d8533b4dc1f: Waiting
+Step #4: 7ff2f4499221: Waiting
+Step #4: 1bb35e8b4de1: Waiting
+Step #4: 13242f53ac09: Layer already exists
+Step #4: 3d8533b4dc1f: Layer already exists
+Step #4: 7ff2f4499221: Layer already exists
+Step #4: 1bb35e8b4de1: Layer already exists
+Step #4: f73462fd3903: Pushed
+Step #4: d21938364ca3: Pushed
+Step #4: 264debed256c: Pushed
+Step #4: c75611081b9c: Pushed
+Step #4: latest: digest: sha256:7054ec582e9298527e412dd165c96f2443c1c83c30ec643ee40a8c0120c9ea53 size: 1992
+Finished Step #4
+Starting Step #5
+Step #5: Already have image (with digest): gcr.io/google.com/cloudsdktool/cloud-sdk
+Step #5: Deploying container to Cloud Run service [locust-ui] in project [ornate-axiom-466310-f0] region [us-central1]
+Step #5: Deploying...
+Step #5: Setting IAM Policy............warning
+Step #5: Creating Revision.............................................................................................................................................................................................................done
+Step #5: Routing traffic.....done
+Step #5: Completed with warnings:
+Step #5:   Setting IAM policy failed, try "gcloud beta run services add-iam-policy-binding --region=us-central1 --member=allUsers --role=roles/run.invoker locust-ui"
+Step #5: Service [locust-ui] revision [locust-ui-00002-7kg] has been deployed and is serving 100 percent of traffic.
+Step #5: Service URL: https://locust-ui-1026355969293.us-central1.run.app
+Finished Step #5
+PUSH
+Pushing us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/flask-api:latest
+The push refers to repository [us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/flask-api]
+46ce67099571: Preparing
+116b4a572867: Preparing
+3d77e5a12fc2: Preparing
+36a794139133: Preparing
+31abbb538de0: Preparing
+a2ccf7527b3c: Preparing
+abd92ba2021e: Preparing
+1bb35e8b4de1: Preparing
+a2ccf7527b3c: Waiting
+abd92ba2021e: Waiting
+1bb35e8b4de1: Waiting
+3d77e5a12fc2: Layer already exists
+116b4a572867: Layer already exists
+31abbb538de0: Layer already exists
+46ce67099571: Layer already exists
+36a794139133: Layer already exists
+a2ccf7527b3c: Layer already exists
+abd92ba2021e: Layer already exists
+1bb35e8b4de1: Layer already exists
+latest: digest: sha256:68353cc11a54b52d7d116bdf50a3c7691b430395cc0f07874e96e643436e61d5 size: 1991
+Pushing us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/locust:latest
+The push refers to repository [us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/locust]
+264debed256c: Preparing
+c75611081b9c: Preparing
+f73462fd3903: Preparing
+d21938364ca3: Preparing
+13242f53ac09: Preparing
+3d8533b4dc1f: Preparing
+7ff2f4499221: Preparing
+1bb35e8b4de1: Preparing
+7ff2f4499221: Waiting
+1bb35e8b4de1: Waiting
+3d8533b4dc1f: Waiting
+264debed256c: Layer already exists
+d21938364ca3: Layer already exists
+c75611081b9c: Layer already exists
+f73462fd3903: Layer already exists
+13242f53ac09: Layer already exists
+3d8533b4dc1f: Layer already exists
+7ff2f4499221: Layer already exists
+1bb35e8b4de1: Layer already exists
+latest: digest: sha256:7054ec582e9298527e412dd165c96f2443c1c83c30ec643ee40a8c0120c9ea53 size: 1992
+DONE
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ID: 5e65d587-b211-4dc9-baf6-dc6bc6371178
+CREATE_TIME: 2025-07-18T17:57:44+00:00
+DURATION: 2M45S
+SOURCE: gs://ornate-axiom-466310-f0_cloudbuild/source/1752861462.978724-b30766bd4f6b4ca18d9a5d9911151fd0.tgz
+IMAGES: us-central1-docker.pkg.dev/ornate-axiom-466310-f0/flask-locust-repo/flask-api (+3 more)
+STATUS: SUCCESS
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ gcloud run services list
+✔
+SERVICE: flask-api
+REGION: us-central1
+URL: https://flask-api-1026355969293.us-central1.run.app
+LAST DEPLOYED BY: 1026355969293-compute@developer.gserviceaccount.com
+LAST DEPLOYED AT: 2025-07-18T17:59:31.550247Z
+
+✔
+SERVICE: locust-ui
+REGION: us-central1
+URL: https://locust-ui-1026355969293.us-central1.run.app
+LAST DEPLOYED BY: 1026355969293-compute@developer.gserviceaccount.com
+LAST DEPLOYED AT: 2025-07-18T18:00:24.313285Z
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ gcloud run services add-iam-policy-binding flask-api --member="allUsers" --role="roles/run.invoker" --region=us-central1
+Updated IAM policy for service [flask-api].
+bindings:
+- members:
+  - allUsers
+  role: roles/run.invoker
+etag: BwY6N_Na3dg=
+version: 1
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ gcloud run services add-iam-policy-binding locust-ui --member="allUsers" --role="roles/run.invoker" --region=us-central1
+Updated IAM policy for service [locust-ui].
+bindings:
+- members:
+  - allUsers
+  role: roles/run.invoker
+etag: BwY6N_QIRs4=
+version: 1
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ gcloud run services list
+✔
+SERVICE: flask-api
+REGION: us-central1
+URL: https://flask-api-1026355969293.us-central1.run.app
+LAST DEPLOYED BY: 1026355969293-compute@developer.gserviceaccount.com
+LAST DEPLOYED AT: 2025-07-18T17:59:31.550247Z
+
+✔
+SERVICE: locust-ui
+REGION: us-central1
+URL: https://locust-ui-1026355969293.us-central1.run.app
+LAST DEPLOYED BY: 1026355969293-compute@developer.gserviceaccount.com
+LAST DEPLOYED AT: 2025-07-18T18:00:24.313285Z
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ gcloud run services describe flask-api --region=us-central1 --format='value(spec.template.spec.containers[0].resources.limits)'
+cpu=2;memory=4Gi
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ gcloud logging read 'resource.type="cloud_run_revision" AND resource.labels.service_name="flask-api" AND resource.labels.location="us-central1"' --format=json > flask-api-logs.json
+g24ai2018@cloudshell:~/flask_locust_gcp (ornate-axiom-466310-f0)$ 
